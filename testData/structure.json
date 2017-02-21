@@ -1,0 +1,74 @@
+{
+  database1: {
+    books: [
+      {
+        _id: ObjectID,
+        type: 0,
+        title: "Critical library instruction",
+        subtitle: "Theories and Methods",
+        addtitle: "",
+        authors: "Accardi, Maria T.; Drabinsky, Emily; Kumbier, Alana",
+        year: 2010,
+        authoring-assistants: "",
+        institution: "",
+        publishing-location: "Duluth MN",
+        publisher: "Library Juice Press",
+        number-of-books: 1,
+        edition: 0,
+        line-title: "",
+        line-booknr: 0,
+        isbn: 9781936117017,
+        add-url: "",
+        last-checked: 1970-01-01,
+        first-published: 1970-01-01,
+        language: "en",
+        price: 0,
+        added: 1970-01-01,
+        modified: 1970-01-01,
+        notes: "",
+        abstract: "",
+        toc: ""
+        rating: { stars: 3, text: "" }
+        tags: [ "tag", "tag" ],
+        categories: [ { _id: 0, name: "" } ],
+        references: [],
+        referenced-by: [],
+        quotations: [
+            {
+              _id: 00232,
+              type: quote | indirect-quote | comment | summary,
+              core-statement: "",
+              files: [], //file only
+              legend: "", //file only
+              description: "", //file only
+              text: "",
+              pagenr-start: 0,
+              pagenr-stop: 0,
+              tags: [],
+              categories: [],
+              creator-id: 20,
+              history: []
+            }
+        ],
+        tasks: [
+
+        ],
+        locations: [
+
+        ]
+      }
+    ],
+    permissions: [
+      { _id: ObjectID, read: true, write: true }
+    ]
+  },
+  app-settings: {
+    types: [
+      { _id: 0, short: "monography", title: "Buch (Monografie)"},
+      { _id: 1, short: "collection", title: "Buch (Sammelwerk)"}
+    ]
+  }
+  users: [
+    { _id: ObjectID(), FirstName: "Mike", LastName: "Mustermann", Username: "Mike", HashedPassword: "8zhwjnkjfnd98oijdfs" },
+  ]
+}
