@@ -10,11 +10,11 @@ import (
 // User is a Struct that resembles a user containing
 // UserId, Name, Username and HashedPassword
 type User struct {
-	// UserID is the Database compatible user id number
-	UserID             int
 	Name               string
 	Username, Password string
+	Email              string
 	HashedPassword     []byte
+	Role               int
 }
 
 func (u *User) String() string {
@@ -26,9 +26,9 @@ var userRegex = regexp.MustCompile("^\\w*$")
 func (user *User) Validate(v *revel.Validation) {
 	v.Check(user.Username,
 		revel.Required{},
-		revel.MaxSize{15},
-		revel.MinSize{4},
-		revel.Match{userRegex},
+		revel.MaxSize{Max: 15},
+		revel.MinSize{Min: 4},
+		revel.Match{Regexp: userRegex},
 	)
 
 	ValidatePassword(v, user.Password).
@@ -36,14 +36,14 @@ func (user *User) Validate(v *revel.Validation) {
 
 	v.Check(user.Name,
 		revel.Required{},
-		revel.MaxSize{100},
+		revel.MaxSize{Max: 100},
 	)
 }
 
 func ValidatePassword(v *revel.Validation, password string) *revel.ValidationResult {
 	return v.Check(password,
 		revel.Required{},
-		revel.MaxSize{15},
-		revel.MinSize{5},
+		revel.MaxSize{Max: 15},
+		revel.MinSize{Min: 5},
 	)
 }

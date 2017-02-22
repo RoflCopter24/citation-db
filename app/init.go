@@ -21,7 +21,7 @@ func init() {
 
 	// register startup functions with OnAppStart
 	// ( order dependent )
-	// revel.OnAppStart(InitDB)
+	//revel.OnAppStart(InitDB)
 	// revel.OnAppStart(FillCache)
 }
 

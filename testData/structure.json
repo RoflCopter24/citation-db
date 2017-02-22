@@ -69,6 +69,6 @@
     ]
   }
   users: [
-    { _id: ObjectID(), FirstName: "Mike", LastName: "Mustermann", Username: "Mike", HashedPassword: "8zhwjnkjfnd98oijdfs" },
+    { _id: ObjectID(), FirstName: "Mike", LastName: "Mustermann", Username: "Mike", Email: "test@test.com", HashedPassword: "8zhwjnkjfnd98oijdfs", role: 2 },
   ]
 }
