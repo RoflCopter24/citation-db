@@ -133,8 +133,6 @@ func main() {
 			&revel.MethodType{
 				Name: "Login",
 				Args: []*revel.MethodArg{ 
-					&revel.MethodArg{Name: "username", Type: reflect.TypeOf((*string)(nil)) },
-					&revel.MethodArg{Name: "password", Type: reflect.TypeOf((*string)(nil)) },
 					&revel.MethodArg{Name: "remember", Type: reflect.TypeOf((*bool)(nil)) },
 				},
 				RenderArgNames: map[int][]string{ 
@@ -168,8 +166,8 @@ func main() {
 	
 	revel.DefaultValidationKeys = map[string]map[int]string{ 
 		"github.com/RoflCopter24/citation-db/app/controllers.App.SaveUser": { 
-			82: "verifyPassword",
-			83: "verifyPassword",
+			86: "verifyPassword",
+			87: "verifyPassword",
 		},
 		"github.com/RoflCopter24/citation-db/app/models.(*User).Validate": { 
 			32: "user.Username",

@@ -9,7 +9,7 @@ import (
 )
 
 type App struct {
-	*MongoController
+	MongoController
 }
 
 func (c App) AddUser() revel.Result {
@@ -36,10 +36,12 @@ func (c App) IsUserLoggedIn() *models.User {
 func (c App) getUser(username string) *models.User {
 	result := models.User{}
 	coll := c.mgoSess.DB("citation").C("users")
+	revel.TRACE.Printf("Username is %s\n", username)
+	revel.TRACE.Print(coll.Name)
 	err := coll.Find(bson.M{"Username": username}).One(&result)
 
 	if err != nil {
-		panic(err)
+		revel.ERROR.Fatal(err)
 	}
 
 	return &result
@@ -52,7 +54,9 @@ func (c App) Index() revel.Result {
 	return c.RenderTemplate("App/Index.html")
 }
 
-func (c App) Login(username, password string, remember bool) revel.Result {
+func (c App) Login(remember bool) revel.Result {
+	username := c.Params.Get("inputUser")
+	password := c.Params.Get("inputPassword")
 	user := c.getUser(username)
 	if user != nil {
 		err := bcrypt.CompareHashAndPassword(user.HashedPassword, []byte(password))

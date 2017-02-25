@@ -110,14 +110,10 @@ func (_ tApp) Index(
 }
 
 func (_ tApp) Login(
-		username string,
-		password string,
 		remember bool,
 		) string {
 	args := make(map[string]string)
 	
-	revel.Unbind(args, "username", username)
-	revel.Unbind(args, "password", password)
 	revel.Unbind(args, "remember", remember)
 	return revel.MainRouter.Reverse("App.Login", args).Url
 }
