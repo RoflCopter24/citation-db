@@ -20,3 +20,7 @@ func (u *User) String() string {
 }
 
 var userRegex = regexp.MustCompile("^\\w*$")
+
+func IsValidUsername(name string) bool {
+	return userRegex.MatchString(name)
+}

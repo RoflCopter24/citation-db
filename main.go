@@ -5,11 +5,14 @@ import (
 	"net/http"
 
 	"github.com/urfave/negroni"
-	"github.com/gorilla/context"
 	mgosession "github.com/joeljames/nigroni-mgo-session"
-	mgo "gopkg.in/mgo.v2"
+	"github.com/goincremental/negroni-sessions"
+	"github.com/goincremental/negroni-sessions/cookiestore"
 	"github.com/RoflCopter24/citation-db/settings"
 	"github.com/RoflCopter24/citation-db/middleware"
+	"html/template"
+	"github.com/RoflCopter24/citation-db/models"
+	"github.com/RoflCopter24/citation-db/handlers"
 )
 
 var (
@@ -40,30 +43,52 @@ func main() {
 
 	n := negroni.Classic()
 
+
+	n.Use(negroni.NewRecovery())
+
+	n.Use(negroni.NewLogger())
+
+	store := cookiestore.New([]byte("citation-db.C_Store01"))
+	n.Use(sessions.Sessions("CitationSession", store))
+
 	// Setup MongoDb connection stuff
 	setupMgo(n, &appSettings)
 
-	ac := middleware.AuthChecker{}
+	whiteList := make([]string,5)
+	whiteList[0] = "/login"
+	whiteList[1] = "/css/"
+	whiteList[2] = "/js/"
+	whiteList[3] = "/img/"
+
+	ac := middleware.AuthChecker{ UsersDB: appSettings.DbName, UsersCollection: "users", WhiteList: whiteList }
 	n.Use(ac.Middleware())
 
 	mux := http.NewServeMux()
-	mux.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {
-		// You can access the mgo db object from the request object.
-		// The db object is stored in key `db`.
-		db := context.Get(request, "db").(*mgo.Database)
-		// Now lets perform a count query using mgo db object.
-		count, _ := db.C("users").Find(nil).Count()
-		fmt.Fprintf(writer, "Determining the count in the collection using the db object. \n\n")
-		fmt.Fprintf(writer, "Total number of object in the mongo database: %d  \n\n", count)
 
-		// You can access the mgo session object from the request object.
-		// The session object is stored in key `mgoSession`.
-		mgoSession := context.Get(request, "mgoSession").(*mgo.Session)
-		count2, _ := mgoSession.DB(appSettings.DbName).C("users").Find(nil).Count()
-		fmt.Fprintf(writer, "Determining the count in the collection using the session object. \n\n")
-		fmt.Fprintf(writer, "Total number of object in the mongo database: %d  \n\n", count2)
+	mux.HandleFunc("/index.html", func(writer http.ResponseWriter, request *http.Request) {
 
+		fmt.Print("Das Lama rennt!")
+
+		sess := sessions.GetSession(request)
+		u := sess.Get("User")
+
+		if u == nil {
+			panic("User is nil!")
+		}
+
+		user := u.(*models.User)
+
+		pData := models.Page{ Title: "Startseite", User: user }
+
+		tpl, _ := template.ParseFiles("html/frame_footer.html", "html/frame_header.html", "html/index.html")
+		tpl.ExecuteTemplate(writer, "index.html", pData)
 	})
+
+	mux.HandleFunc("/login", handlers.HandleLogin)
+
+	mux.Handle("/img", http.FileServer(http.Dir("img")))
+	mux.Handle("/js", http.FileServer(http.Dir("js")))
+	mux.Handle("/css", http.FileServer(http.Dir("css")))
 
 	n.UseHandler(mux)
 	n.Run(":8080")
