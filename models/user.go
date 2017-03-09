@@ -8,11 +8,12 @@ import (
 // User is a Struct that resembles a user containing
 // UserId, Name, Username and HashedPassword
 type User struct {
-	Name               string
-	Username, Password string
-	Email              string
-	HashedPassword     []byte
-	Role               int
+	FirstName		string 	`bson:"firstname"`
+	LastName               	string 	`bson:"lastname"`
+	Username           	string 	`bson:"username"`
+	Email              	string 	`bson:"email"`
+	HashedPassword     	[]byte 	`bson:"hashedpassword"`
+	Role               	int	`bson:"role"`
 }
 
 func (u *User) String() string {

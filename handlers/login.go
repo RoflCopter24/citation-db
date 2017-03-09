@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"net/http"
-	"fmt"
 	"gopkg.in/mgo.v2"
 	"github.com/RoflCopter24/citation-db/models"
 	"html/template"
@@ -13,8 +12,6 @@ import (
 )
 
 func HandleLogin(w http.ResponseWriter, r *http.Request) {
-
-	fmt.Print("Login!")
 
 	if r.Method == "GET" {
 		handleLoginGET(w, r)
@@ -50,28 +47,31 @@ func handleLoginPOST(w http.ResponseWriter, r *http.Request) {
 	// The db object is stored in key `db`.
 	db := context.Get(r, "db").(*mgo.Database)
 	// Now lets perform a count query using mgo db object.
+
 	user := models.User{}
-	err := db.C("users").Find(bson.M{ "Username": userName }).One(&user)
+	err := db.C("users").Find(bson.M{ "username": userName }).One(&user)
 
 	if err != nil {
 		data.Error = err.Error()
 	} else {
-
 		err2 := bcrypt.CompareHashAndPassword(user.HashedPassword, []byte(userPass))
 		if err2 != nil {
 			data.Error = err2.Error()
-		}
-		data.Success = true
-		data.User = &user
-		session := sessions.GetSession(r)
-		session.Set("User", &user)
-		context.Set(r, "User", &user)
+		} else {
+			data.Success = true
+			data.User = &user
+			session := sessions.GetSession(r)
+			session.Set("Username", userName)
+			//session.Set("User", &user)
+			context.Set(r, "User", userName)
+			//context.Set(r, "User", &user)
 
-		tUrl := session.Get("TargetUrl")
-		if tUrl == nil {
+			tUrl := session.Get("TargetUrl")
+			if tUrl == nil {
 			tUrl = "/"
+			}
+			data.TargetUrl = tUrl.(string)
 		}
-		data.TargetUrl = tUrl.(string)
 	}
 
 	// You can access the mgo session object from the request object.

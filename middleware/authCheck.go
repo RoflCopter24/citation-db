@@ -5,9 +5,12 @@ import (
 	"net/http"
 	"github.com/gorilla/context"
 	"github.com/RoflCopter24/citation-db/models"
-	//"gopkg.in/mgo.v2"
+	_"gopkg.in/mgo.v2"
 	"github.com/goincremental/negroni-sessions"
 	"strings"
+	_"fmt"
+	"gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2/bson"
 )
 
 type AuthChecker struct {
@@ -30,7 +33,7 @@ func (ac *AuthChecker) Middleware() negroni.HandlerFunc {
 		// Session is stored in memory on the server, so we can put the
 		// whole User object there and retrieve it
 		session := sessions.GetSession(request)
-		u := session.Get("User")
+		u := session.Get("Username")
 
 		if u == nil {
 			context.Set(request, "TargetUrl", request.RequestURI)
@@ -39,8 +42,25 @@ func (ac *AuthChecker) Middleware() negroni.HandlerFunc {
 			return
 		}
 
-		user := u.(*models.User)
-		context.Set(request, "User", user)
+		uName := u.(string)
+
+		db := context.Get(request, "db").(*mgo.Database)
+
+		uC := context.Get(request, "User")
+
+		user := models.User{}
+
+		if uC != nil {
+			user = *uC.(*models.User)
+		} else {
+			err := db.C("users").Find(bson.M{"username": uName }).One(&user)
+
+			if err != nil {
+				panic(err)
+			}
+		}
+
+		context.Set(request, "User", &user)
 		next(writer, request)
 	}
 }
