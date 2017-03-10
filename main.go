@@ -73,6 +73,14 @@ func main() {
 
 	mux.HandleFunc("/login", handlers.HandleLogin)
 
+	mux.HandleFunc("/books/add", handlers.HandleBooksAdd)
+
+	mux.HandleFunc("/books", handlers.HandleBooksIndex)
+
+	mux.HandleFunc("/books/", handlers.HandleBooksIndex)
+
+	mux.HandleFunc("/books/list", handlers.HandleBooksList)
+
 	mux.Handle("/img", http.FileServer(http.Dir("img")))
 	mux.Handle("/js", http.FileServer(http.Dir("js")))
 	mux.Handle("/css", http.FileServer(http.Dir("css")))

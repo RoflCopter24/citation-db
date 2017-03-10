@@ -1,0 +1,179 @@
+{{ template "frame_header.html" . }}
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    {{ template "frame_menu.html" . }}
+    <main class="mdl-layout__content">
+        <div class="mdl-grid">
+            <div class="mdl-cell--10-col-desktop mdl-cell--1-offset-desktop mdl-cell--12-col-phone">
+                <h2>Werk hinzuf&uuml;gen</h2>
+                <p>F&uuml;ge ein Werk der Bibliothek hinzu</p>
+
+                <form class="form" action="/books/add" method="post" name="form_books-add">
+                    <div class="mdl-grid">
+                        <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" id="bookTitle" name="bookTitle">
+                                <label class="mdl-textfield__label" for="bookTitle">Titel des Werkes</label>
+                            </div>
+                        </div>
+                        <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" id="bookSubtitle" name="bookSubtitle">
+                                <label class="mdl-textfield__label" for="bookTitle">Untertitel</label>
+                            </div>
+                        </div>
+                        <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" id="bookAuthor" name="bookAuthor">
+                                <label class="mdl-textfield__label" for="bookTitle">Autor</label>
+                            </div>
+                        </div>
+                        <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="number" id="bookISBN" name="bookISBN">
+                                <label class="mdl-textfield__label" for="bookISBN">ISBN</label>
+                            </div>
+                        </div>
+                        <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" id="bookAddTitle" name="bookAddTitle">
+                                <label class="mdl-textfield__label" for="bookAddTitle">Titelzusatz</label>
+                            </div>
+                        </div>
+                        <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" id="bookAuthoringAssistants" name="bookAuthoringAssistants">
+                                <label class="mdl-textfield__label" for="bookAuthoringAssistants">Authoring Assistants</label>
+                            </div>
+                        </div>
+                        <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="number" id="bookYear" name="bookYear">
+                                <label class="mdl-textfield__label" for="bookYear">Ver&ouml;ffentlichungsjahr</label>
+                            </div>
+                        </div>
+                        <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" id="bookInstitution" name="bookInstitution">
+                                <label class="mdl-textfield__label" for="bookInstitution">Institut</label>
+                            </div>
+                        </div>
+                        <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" id="bookPublishingLocation" name="bookPublishingLocation">
+                                <label class="mdl-textfield__label" for="bookPublishingLocation">Ver&ouml;ffentlichungsort</label>
+                            </div>
+                        </div>
+                        <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" id="bookPublisher" name="bookPublisher">
+                                <label class="mdl-textfield__label" for="bookPublisher">Verleger</label>
+                            </div>
+                        </div>
+                        <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="number" id="bookNumberOfBooks" name="bookNumberOfBooks">
+                                <label class="mdl-textfield__label" for="bookNumberOfBooks">Anzahl B&auml;nde</label>
+                            </div>
+                        </div>
+                        <div class="form-control mdl-cell--12-col-phone mdl-cell--6-col-tablet  mdl-cell--4-col-desktop">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" id="bookEdition" name="bookEdition">
+                                <label class="mdl-textfield__label" for="bookEdition">Auflage</label>
+                            </div>
+                        </div>
+                        <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" id="bookLineTitle" name="bookLineTitle">
+                                <label class="mdl-textfield__label" for="bookLineTitle">Reihentitel</label>
+                            </div>
+                        </div>
+                        <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="number" id="bookLineNumber" name="bookLineNumber">
+                                <label class="mdl-textfield__label" for="bookLineNumber">Nummer dieses Buches in der Reihe</label>
+                            </div>
+                        </div>
+                        <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="url" id="bookAddUrl" name="bookAddUrl">
+                                <label class="mdl-textfield__label" for="bookAddUrl">Zus&auml;tzlicher Link</label>
+                            </div>
+                        </div>
+                        <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="date" id="bookLastChecked" name="bookLastChecked">
+                                <label class="mdl-textfield__label" for="bookLastChecked">Letzte &Uuml;berprüfung</label>
+                            </div>
+                        </div>
+                        <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="date" id="bookFirstPublished" name="bookFirstPublished">
+                                <label class="mdl-textfield__label" for="bookFirstPublished">Erste Ver&ouml;ffentlichung</label>
+                            </div>
+                        </div>
+                        <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" id="bookLanguage" name="bookLanguage">
+                                <label class="mdl-textfield__label" for="bookLanguage">Sprache</label>
+                            </div>
+                        </div>
+                        <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="number" id="bookPrice" name="bookPrice">
+                                <label class="mdl-textfield__label" for="bookPrice">Preis</label>
+                            </div>
+                        </div>
+                        <div class="form-control mdl-cell--3-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <textarea class="mdl-textfield__input" type="text" rows= "3" id="bookNotes" name="bookNotes"></textarea>
+                                <label class="mdl-textfield__label" for="bookNotes">Notizen</label>
+                            </div>
+                        </div>
+                        <div class="form-control mdl-cell--3-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <textarea class="mdl-textfield__input" type="text" rows= "3" id="bookAbstract" name="bookAbstract"></textarea>
+                                <label class="mdl-textfield__label" for="bookAbstract">Abstrakt</label>
+                            </div>
+                        </div>
+                        <div class="form-control mdl-cell--3-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <textarea class="mdl-textfield__input" type="text" rows= "3" id="bookToc" name="bookToc"></textarea>
+                                <label class="mdl-textfield__label" for="bookToc">Inhaltsverzeichnis</label>
+                            </div>
+                        </div>
+                        <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" id="bookTags" name="bookTags">
+                                <label class="mdl-textfield__label" for="bookTags">Tags</label>
+                            </div>
+                        </div>
+                        <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" id="bookCategories" name="bookCategories">
+                                <label class="mdl-textfield__label" for="bookCategories">Kategorien</label>
+                            </div>
+                        </div>
+                        <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" id="bookReferences" name="bookReferences">
+                                <label class="mdl-textfield__label" for="bookReferences">Referenzen</label>
+                            </div>
+                        </div>
+                        <input class="mdl-cell--hide-tablet mdl-cell--hide-tablet mdl-cell--hide-desktop" type="hidden" name="checkField" value="{{ .CheckStr }}">
+                    </div>
+                    <div class="mdl-grid">
+                        <div class="form-control mdl-cell--3-col-tablet mdl-cell--6-col-phone mdl-cell--2-col-desktop">
+                            <button type="reset" class="mdl-button mdl-js-button mdl-js-ripple-effect">Abbrechen</button>
+                        </div>
+                        <div class="form-control mdl-cell--6-offset-tablet mdl-cell--3-col-tablet mdl-cell--6-col-phone mdl-cell--8-offset-desktop mdl-cell--2-col-desktop">
+                            <button type="submit" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">Hinzuf&uuml;gen</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+</div>
+
+{{ template "frame_footer.html" . }}
