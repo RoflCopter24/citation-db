@@ -34,7 +34,9 @@ func HandleBooksAddGET (w http.ResponseWriter, r *http.Request) {
 
 	user := u.(*models.User)
 
-	pData := models.Page{ Title: "Werk hinzufügen", User: user }
+	pData := models.PageBookEdit{}
+	pData.Title = "Werk hinzufügen"
+	pData.User = user
 	pData.GenCheckStr()
 
 	session := sessions.GetSession(r)
@@ -236,7 +238,44 @@ func HandleBooksList (writer http.ResponseWriter, request *http.Request) {
 	tpl.ExecuteTemplate(writer, "books-list.html", pData)
 }
 
-func HandleBooksEditGET (writer http.ResponseWriter, request *http.Request) {
+func HandleBooksEdit (writer http.ResponseWriter, request *http.Request) {
+
+	if request.Method == "GET" {
+		HandleBooksEditGET(writer, request)
+	} else if request.Method == "POST" {
+		HandleBooksEditPOST(writer, request)
+	}
+}
+
+func HandleBooksEditGET (w http.ResponseWriter, r *http.Request) {
+
+	pData := models.PageBookEdit{}
+	if len(r.URL.Path) < len("/books/edit/a") {
+		pData.Error = "Kein Werk ausgewählt!"
+		pData.Title = "Fehler"
+	} else {
+		pData.Title = "Werk editieren"
+
+		bookId := r.URL.Path[len("/books/edit/"):]
+
+		db := context.Get(r, "db").(*mgo.Database)
+
+		book := models.Book{}
+		errDb := db.C("books").Find(bson.M{ "_id": bookId }).One(&book)
+
+		if errDb != nil {
+			panic(errDb)
+		}
+
+		pData.Book = book
+		pData.GenCheckStr()
+
+	}
+	tpl, _ := template.ParseGlob("html/*.html")
+	tpl.ExecuteTemplate(w, "books-edit.html", pData)
+}
+
+func HandleBooksEditPOST (w http.ResponseWriter, r *http.Request) {
 
 }
 

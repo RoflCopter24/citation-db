@@ -20,7 +20,7 @@
                     </thead>
                     <tbody>
                         {{ range .Books }}
-                        <tr>
+                        <tr data-id="{{ .Id }}">
                             <td>{{ .Title }}</td>
                             <td>{{ .Authors }}</td>
                             <td>{{ .Year }}</td>

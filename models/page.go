@@ -2,6 +2,7 @@ package models
 
 import (
 	"math/rand"
+	"strconv"
 )
 
 type Page struct {
@@ -11,5 +12,5 @@ type Page struct {
 }
 
 func (p *Page) GenCheckStr() {
-	p.CheckStr = string(rand.Int())
+	p.CheckStr = strconv.Itoa(rand.Int())
 }

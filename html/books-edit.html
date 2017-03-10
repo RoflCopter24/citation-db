@@ -1,0 +1,31 @@
+{{ template "frame_header.html" . }}
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    {{ template "frame_menu.html" . }}
+    <main class="mdl-layout__content">
+        <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col mdl-cell--10-col-desktop mdl-cell--1-offset-desktop">
+                <h2>Werk editieren</h2>
+                <p>Daten eines bestehenden Werkes &auml;ndern</p>
+
+                {{ if .Error }}
+                <p><b>{{ .Error }}</b></p>
+                {{ end }}
+
+                <form class="form" action="/books/edit/{{.Book.Id}}" method="post" name="form_books-edit">
+                    {{ template "books-form.html" . }}
+                    <div class="mdl-grid">
+                        <div class="form-control mdl-cell--3-col-tablet mdl-cell--6-col-phone mdl-cell--2-col-desktop">
+                            <button type="reset" class="mdl-button mdl-js-button mdl-js-ripple-effect">Abbrechen</button>
+                        </div>
+                        <div class="form-control mdl-cell--6-offset-tablet mdl-cell--3-col-tablet mdl-cell--6-col-phone mdl-cell--8-offset-desktop mdl-cell--2-col-desktop">
+                            <button type="submit" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">Hinzuf&uuml;gen</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+</div>
+
+{{ template "frame_footer.html" . }}

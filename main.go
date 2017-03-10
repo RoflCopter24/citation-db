@@ -81,6 +81,8 @@ func main() {
 
 	mux.HandleFunc("/books/list", handlers.HandleBooksList)
 
+	mux.HandleFunc("/books/edit/", handlers.HandleBooksEdit)
+
 	mux.Handle("/img", http.FileServer(http.Dir("img")))
 	mux.Handle("/js", http.FileServer(http.Dir("js")))
 	mux.Handle("/css", http.FileServer(http.Dir("css")))
