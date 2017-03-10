@@ -21,6 +21,6 @@ func HandleStart (writer http.ResponseWriter, request *http.Request) {
 
 	pData := models.Page{ Title: "Startseite", User: user }
 
-	tpl, _ := template.ParseFiles("html/frame_footer.html", "html/frame_header.html", "html/frame_menu.html", "html/index.html")
+	tpl, _ := template.ParseGlob("html/*.html")
 	tpl.ExecuteTemplate(writer, "index.html", pData)
 }

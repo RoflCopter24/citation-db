@@ -4,7 +4,35 @@
     {{ template "frame_menu.html" . }}
 
     <main class="mdl-layout__content">
+        <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col mdl-cell--1-offset-desktop mdl-cell--10-col-desktop">
+                <h1>Liste aller registrierten Werke</h1>
 
+                <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width:100%;">
+                    <thead>
+                        <tr>
+                            <td>Titel</td>
+                            <td>Autor(en)</td>
+                            <td>Jahr</td>
+                            <td>Zitate</td>
+                            <td>Aufgaben</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{ range .Books }}
+                        <tr>
+                            <td>{{ .Title }}</td>
+                            <td>{{ .Authors }}</td>
+                            <td>{{ .Year }}</td>
+                            <td>{{ len .Quotations }}</td>
+                            <td>{{ len .Tasks }}</td>
+                        </tr>
+                        {{ end }}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {{ template "frame_fixedfabs.html" . }}
     </main>
 </div>
 

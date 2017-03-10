@@ -40,7 +40,7 @@ func HandleBooksAddGET (w http.ResponseWriter, r *http.Request) {
 	session := sessions.GetSession(r)
 	session.Set("CheckStr", pData.CheckStr)
 
-	tpl, _ := template.ParseFiles("html/frame_footer.html", "html/frame_header.html", "html/frame_menu.html", "html/books-add.html")
+	tpl, _ := template.ParseGlob("html/*.html")
 	tpl.ExecuteTemplate(w, "books-add.html", pData)
 }
 
@@ -183,12 +183,61 @@ func HandleBooksList (writer http.ResponseWriter, request *http.Request) {
 		return
 	}
 
+	// Receive current user from context
 	user := u.(*models.User)
 
-	pData := models.Page{ Title: "Liste der Werke", User: user }
+	// Determine if number of items per page is set
+	numPerPage, errNPP := strconv.Atoi(request.FormValue("itemsPerPage"))
+	if errNPP != nil {
+		// if not limit to 30 items per page
+		numPerPage = 30
+	}
 
-	tpl, _ := template.ParseFiles("html/frame_footer.html", "html/frame_header.html", "html/frame_menu.html", "html/books-list.html")
+	db := context.Get(request, "db").(*mgo.Database)
+
+	// See how many total books are in the Database
+	numOfBooks, errCount := db.C("books").Count()
+	if errCount != nil {
+		panic(errCount)
+	}
+
+	// Calc how many pages are needed
+	pageCount := numOfBooks / numPerPage
+	var currPageStr string
+	if len(request.URL.Path) > len("/books/list") {
+		currPageStr = request.URL.Path[len("/books/list/"):]
+	}
+
+	if currPageStr == "" {
+		currPageStr = "1"
+	}
+
+	currPage, errCurrPage := strconv.Atoi(currPageStr)
+
+	if errCurrPage != nil {
+		currPage = 1
+	}
+
+	var books []models.Book
+	err := db.C("books").Find(nil).Skip((currPage-1)*numPerPage).Limit(25).All(&books)
+
+	pData := models.PageBookList{}
+	pData.Title 	= "Werke"
+	pData.User 	= user
+	pData.Books 	= books
+	pData.PageCount = pageCount
+
+	if err != nil {
+		fmt.Println("[ListBooks] Query failed: " + err.Error())
+		pData.Error = err.Error()
+	}
+
+	tpl, _ := template.ParseGlob("html/*.html")
 	tpl.ExecuteTemplate(writer, "books-list.html", pData)
+}
+
+func HandleBooksEditGET (writer http.ResponseWriter, request *http.Request) {
+
 }
 
 func HandleBooksIndex (w http.ResponseWriter, r *http.Request) {
