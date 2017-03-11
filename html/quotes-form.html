@@ -1,0 +1,55 @@
+<div class="mdl-grid">
+    <div class="form-control mdl-cell mdl-cell--12-col">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="quoteBook" name="quoteCoreStatement" {{ if .Book }}value="{{.Book.Title}}"{{end}}>
+            <label class="mdl-textfield__label" for="quoteBook">Werk</label>
+        </div>
+    </div>
+    <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <select id="quoteType" class="mdl-textfield__input">
+                <option value="0" {{if .Quote}}{{ if eq .Quote.Type 0 }}selected{{end}}{{end}}>Zitat</option>
+                <option value="1" {{if .Quote}}{{ if eq .Quote.Type 1 }}selected{{end}}{{end}}>Indirektes Zitat</option>
+                <option value="2" {{if .Quote}}{{ if eq .Quote.Type 2 }}selected{{end}}{{end}}>Kommentar</option>
+                <option value="3" {{if .Quote}}{{ if eq .Quote.Type 3 }}selected{{end}}{{end}}>Zusammenfassung</option>
+            </select>
+            <label class="mdl-textfield__label" for="quoteType">Typ</label>
+        </div>
+    </div>
+    <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="quoteCoreStatement" name="quoteCoreStatement" {{ if .Quote.CoreStatement }}value="{{.Quote.CoreStatement}}"{{end}}>
+            <label class="mdl-textfield__label" for="quoteCoreStatement">Kernaussage</label>
+        </div>
+    </div>
+    <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
+        <div class="mdl-textfield mdl-js-textfield">
+            <textarea class="mdl-textfield__input" type="text" rows= "3" id="quoteText" name="quoteText">{{if .Quote.Text}}{{.Quote.Text}}{{end}}</textarea>
+            <label class="mdl-textfield__label" for="quoteText">Text</label>
+        </div>
+    </div>
+    <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="quotePageNrStart" name="quotePageNrStart" {{ if .Quote.PageNrStart }}value="{{.Quote.PageNrStart}}"{{end}}>
+            <label class="mdl-textfield__label" for="quotePageNrStart">Seite Von</label>
+        </div>
+    </div>
+    <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="quotePageNrStop" name="quotePageNrStop" {{ if .Quote.PageNrStop }}value="{{.Quote.PageNrStop}}"{{end}}>
+            <label class="mdl-textfield__label" for="quotePageNrStop">Seite Bis</label>
+        </div>
+    </div>
+    <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="quoteTags" name="quoteTags" {{ if .Quote.Tags }}value="{{.Quote.Tags}}"{{end}}>
+            <label class="mdl-textfield__label" for="quoteTags">Schlagw&ouml;rter</label>
+        </div>
+    </div>
+    <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="quoteCategories" name="quoteCategories" {{ if .Quote.Categories }}value="{{.Quote.Categories}}"{{end}}>
+            <label class="mdl-textfield__label" for="quoteCategories">Kategorien</label>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+{{ template "frame_header.html" . }}
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    {{ template "frame_menu.html" . }}
+    <main class="mdl-layout__content">
+        <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col mdl-cell--10-col-desktop mdl-cell--1-offset-desktop">
+                <h2>Zitat entfernen</h2>
+
+                {{ if .Error }}
+                <p><b>{{ .Error }}</b></p>
+                {{ end }}
+
+
+            </div>
+        </div>
+    </main>
+</div>
+
+{{ template "frame_footer.html" . }}

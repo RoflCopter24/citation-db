@@ -73,6 +73,8 @@ func main() {
 
 	mux.HandleFunc("/login", handlers.HandleLogin)
 
+	mux.HandleFunc("/logout", handlers.HandleLogout)
+
 	mux.HandleFunc("/books/add", handlers.HandleBooksAdd)
 
 	mux.HandleFunc("/books", handlers.HandleBooksIndex)
@@ -81,7 +83,22 @@ func main() {
 
 	mux.HandleFunc("/books/list", handlers.HandleBooksList)
 
+	mux.HandleFunc("/books/edit", handlers.HandleBooksEdit)
 	mux.HandleFunc("/books/edit/", handlers.HandleBooksEdit)
+
+	mux.HandleFunc("/books/remove/", handlers.HandleBooksDelete)
+
+	mux.HandleFunc("/quotes/", handlers.HandleQuotesIndex)
+
+	mux.HandleFunc("/quotes/search", handlers.HandleQuotesSearch)
+	mux.HandleFunc("/quotes/search/", handlers.HandleQuotesSearch)
+
+	mux.HandleFunc("/quotes/add", handlers.HandleQuotesAdd)
+
+	mux.HandleFunc("/quotes/edit", handlers.HandleQuotesEdit)
+	mux.HandleFunc("/quotes/edit/", handlers.HandleQuotesEdit)
+
+	mux.HandleFunc("/quotes/remove/", handlers.HandleQuotesRemove)
 
 	mux.Handle("/img", http.FileServer(http.Dir("img")))
 	mux.Handle("/js", http.FileServer(http.Dir("js")))

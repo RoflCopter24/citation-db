@@ -85,3 +85,17 @@ func handleLoginPOST(w http.ResponseWriter, r *http.Request) {
 	}
 	tpl.ExecuteTemplate(w, "login.html", data)
 }
+
+func HandleLogout(w http.ResponseWriter, r *http.Request) {
+	session := sessions.GetSession(r)
+	session.Clear()
+	context.Clear(r)
+
+	data := models.Page{ Title: "Abmeldung"}
+
+	tpl, err := template.ParseFiles("html/frame_footer.html", "html/frame_header.html", "html/logout.html")
+	if err != nil {
+		panic(err)
+	}
+	tpl.ExecuteTemplate(w, "logout.html", data)
+}

@@ -17,13 +17,13 @@ import (
 func HandleBooksAdd (writer http.ResponseWriter, request *http.Request) {
 
 	if request.Method == "GET" {
-		HandleBooksAddGET(writer, request)
+		handleBooksAddGET(writer, request)
 	} else if request.Method == "POST" {
-		HandleBooksAddPOST(writer, request)
+		handleBooksAddPOST(writer, request)
 	}
 }
 
-func HandleBooksAddGET (w http.ResponseWriter, r *http.Request) {
+func handleBooksAddGET (w http.ResponseWriter, r *http.Request) {
 
 	u := context.Get(r,"User")
 
@@ -46,7 +46,7 @@ func HandleBooksAddGET (w http.ResponseWriter, r *http.Request) {
 	tpl.ExecuteTemplate(w, "books-add.html", pData)
 }
 
-func HandleBooksAddPOST (w http.ResponseWriter, r *http.Request) {
+func handleBooksAddPOST (w http.ResponseWriter, r *http.Request) {
 
 	session := sessions.GetSession(r)
 	checkStr := session.Get("CheckStr").(string)
@@ -138,13 +138,13 @@ func HandleBooksList (writer http.ResponseWriter, request *http.Request) {
 func HandleBooksEdit (writer http.ResponseWriter, request *http.Request) {
 
 	if request.Method == "GET" {
-		HandleBooksEditGET(writer, request)
+		handleBooksEditGET(writer, request)
 	} else if request.Method == "POST" {
-		HandleBooksEditPOST(writer, request)
+		handleBooksEditPOST(writer, request)
 	}
 }
 
-func HandleBooksEditGET (w http.ResponseWriter, r *http.Request) {
+func handleBooksEditGET (w http.ResponseWriter, r *http.Request) {
 
 	pData := models.PageBookEdit{}
 	if len(r.URL.Path) < len("/books/edit/a") {
@@ -172,7 +172,7 @@ func HandleBooksEditGET (w http.ResponseWriter, r *http.Request) {
 	tpl.ExecuteTemplate(w, "books-edit.html", pData)
 }
 
-func HandleBooksEditPOST (w http.ResponseWriter, r *http.Request) {
+func handleBooksEditPOST (w http.ResponseWriter, r *http.Request) {
 
 	pData := models.PageBookEdit{}
 	if len(r.URL.Path) < len("/books/edit/a") {
@@ -213,6 +213,40 @@ func HandleBooksIndex (w http.ResponseWriter, r *http.Request) {
 	}
 
 	http.Redirect(w, r, "/books/list", 302)
+}
+
+func HandleBooksDelete (w http.ResponseWriter, r *http.Request) {
+	pData := models.Page{}
+
+	user := context.Get(r, "User").(*models.User)
+
+	if user.Role < 1 {
+		pData.Error = "Sie sind nicht berechtigt, diese Aktion durchzuführen"
+		pData.Title = "Verweigert"
+	} else {
+
+		if len(r.URL.Path) < len("/books/remove/a") {
+			pData.Error = "Kein Werk ausgewählt!"
+			pData.Title = "Fehler"
+		} else {
+			pData.Title = "Werk entfernen"
+
+			bookId := r.URL.Path[len("/books/remove/"):]
+
+			db := context.Get(r, "db").(*mgo.Database)
+
+			err := db.C("books").RemoveId(bookId)
+
+			if err != nil {
+				pData.Error = err.Error()
+			} else {
+				pData.Error = "Datensatz erfolgreich entfernt"
+			}
+		}
+	}
+
+	tpl, _ := template.ParseGlob("html/*.html")
+	tpl.ExecuteTemplate(w, "books-del.html", pData)
 }
 
 func BookObjFromPost(r *http.Request) models.Book {
