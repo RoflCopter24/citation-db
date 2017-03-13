@@ -1,24 +1,20 @@
-<header class="mdl-layout__header">
-    <div class="mdl-layout__header-row">
-        <!-- Title -->
-        <span class="mdl-layout-title">{{ .Title }} - CitationDB</span>
-        <!-- Add spacer, to align navigation to the right -->
-        <div class="mdl-layout-spacer"></div>
-        <!-- Navigation. We hide it in small screens. -->
-        <nav class="mdl-navigation mdl-layout--large-screen-only">
-            <a class="mdl-navigation__link is-active" href="/start">Start</a>
-            <a class="mdl-navigation__link" href="/quotes">Zitate</a>
-            <a class="mdl-navigation__link" href="/books">Werke</a>
-            <a class="mdl-navigation__link" href="/logout">Abmelden</a>
-        </nav>
-    </div>
-</header>
-<div class="mdl-layout__drawer">
-    <span class="mdl-layout-title">CitationDB</span>
-    <nav class="mdl-navigation">
-        <a class="mdl-navigation__link is-active" href="/start">Start</a>
-        <a class="mdl-navigation__link" href="/quotes">Zitate</a>
-        <a class="mdl-navigation__link" href="/books">Werke</a>
-        <a class="mdl-navigation__link" href="/logout">Abmelden</a>
+<header class="container-fluid">
+    <nav>
+        <div class="nav-wrapper container">
+            <a href="/" class="brand-logo">CitationDB</a>
+            <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="/quotes/">Zitate</a></li>
+                <li><a href="/books/">Werke</a></li>
+                <li><a href="/collections/">Sammlungen</a></li>
+                <li><a href="/logout">{{ .User.FirstName }}&nbsp;{{ .User.LastName}} abmelden</a></li>
+            </ul>
+            <ul class="side-nav" id="mobile-menu">
+                <li><a href="/quotes/">Zitate</a></li>
+                <li><a href="/books/">Werke</a></li>
+                <li><a href="/collections/">Sammlungen</a></li>
+                <li><a href="/logout">{{ .User.FirstName }}&nbsp;{{ .User.LastName}} abmelden</a></li>
+            </ul>
+        </div>
     </nav>
-</div>
+</header>

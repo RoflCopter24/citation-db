@@ -1,19 +1,22 @@
 {{ template "frame_header.html" . }}
 
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
     {{ template "frame_menu.html" . }}
-    <main class="mdl-layout__content">
-        <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--12-col mdl-cell--10-col-desktop mdl-cell--1-offset-desktop">
+    <main class="container">
+        <div class="row">
+            <div class="col s12 m10">
                 <h2>Hallo {{ .User.FirstName }} {{ .User.LastName }}!</h2>
             </div>
-            <div class="mdl-cell mdl-cell--12-col mdl-cell--10-col-desktop mdl-cell--1-offset-desktop">
+            <div class="col s12 m10">
+                <h3>Aufgaben</h3>
+
+            </div>
+            <div class="col s12 m10">
                 <h3>Letzte Zitate</h3>
 
             </div>
+
         </div>
         {{ template "frame_fixedfabs.html" . }}
     </main>
-</div>
 
 {{ template "frame_footer.html" . }}

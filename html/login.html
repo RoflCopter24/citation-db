@@ -1,63 +1,50 @@
 {{ template "frame_header.html" . }}
 
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-    <header class="mdl-layout__header mdl-layout__header--waterfall portfolio-header">
-        <div class="mdl-layout__header-row portfolio-logo-row">
-                <span class="mdl-layout__title">
-                    <div class="portfolio-logo"></div>
-                    <span class="mdl-layout__title">CitationDB</span>
-                </span>
-        </div>
-    </header>
-    <main class="mdl-layout__content">
-        <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--4-col">&nbsp;</div>
-        </div>
-        <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--4-col">&nbsp;</div>
-            <div class="mdl-cell mdl-cell--4-col">
-                <div class="cdb_login-card mdl-card mdl-shadow--2dp">
-                    {{ if .Success }}
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">Erfolg!</h2>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-                        <p>Sie wurden erfolgreich angemeldet.</p>
-                        <p>Sie sollten in K&uuml;rze weitergeleitet werden - Falls nicht, bitte <a href="{{.TargetUrl}}">hier</a> klicken</p>
-                    </div>
-                    <div class="mdl-card__actions mdl-card--border">
-                    </div>
-                    {{ else }}
-                    <form action="/login" method="post">
-                        <div class="mdl-card__title">
-                            <h2 class="mdl-card__title-text">Anmeldung ben&ouml;tigt</h2>
-                        </div>
-                        <div class="mdl-card__supporting-text">
-                            {{ if .Error }}
-                            <p>Anmeldung fehlgeschlagen: {{.Error}}</p>
-                            {{ end }}
-                            <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" name="username" id="username">
-                                <label class="mdl-textfield__label" for="username">Benutzername</label>
-                            </div>
-                            <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="password" name="userpass" id="userpass">
-                                <label class="mdl-textfield__label" for="userpass">Passwort</label>
-                            </div>
-                        </div>
-                        <div class="mdl-card__actions mdl-card--border">
-                            <button type="submit" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                                Anmelden
-                            </button>
-                        </div>
-                    </form>
-                    {{ end }}
-                </div>
+<div class="container-fluid">
+    <nav>
+        <header class="container">
+            <div class="nav-wrapper">
+                <a href="/" class="brand-logo">{{ .Title }} CitationDB</a>
             </div>
-            <div class="mdl-cell mdl-cell--4-col">&nbsp;</div>
-        </div>
-        <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--4-col">&nbsp;</div>
+        </header>
+    </nav>
+    <main class="container">
+        <div class="valign-wrapper">
+            <div class="valign cdb_login-card card">
+                {{ if .Success }}
+                <div class="card-content">
+                    <div class="card-title">
+                        <h2>Erfolg!</h2>
+                    </div>
+                    <p>Sie wurden erfolgreich angemeldet.</p>
+                    <p>Sie sollten in K&uuml;rze weitergeleitet werden - Falls nicht, bitte <a href="{{.TargetUrl}}">hier</a> klicken</p>
+                </div>
+                {{ else }}
+                <form action="/login" method="post">
+                    <div class="card-content">
+                        <div class="card-title">
+                            <h2>Anmeldung ben&ouml;tigt</h2>
+                        </div>
+                        {{ if .Error }}
+                        <p>Anmeldung fehlgeschlagen: {{.Error}}</p>
+                        {{ end }}
+                        <div class="input-field">
+                            <input class="validate" type="text" name="username" id="username">
+                            <label for="username">Benutzername</label>
+                        </div>
+                        <div class="input-field">
+                            <input class="validate" type="password" name="userpass" id="userpass">
+                            <label for="userpass">Passwort</label>
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        <button type="submit" class="waves-effect waves-light btn">
+                            Anmelden
+                        </button>
+                    </div>
+                </form>
+                {{ end }}
+            </div>
         </div>
     </main>
 </div>

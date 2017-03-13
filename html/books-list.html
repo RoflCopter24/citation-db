@@ -1,21 +1,21 @@
 {{ template "frame_header.html" . }}
 
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+<div class="container-fluid">
     {{ template "frame_menu.html" . }}
 
-    <main class="mdl-layout__content">
-        <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--12-col mdl-cell--1-offset-desktop mdl-cell--10-col-desktop">
+    <main class="container">
+        <div class="row">
+            <div class="col s12">
                 <h1>Liste aller registrierten Werke</h1>
 
-                <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width:100%;">
+                <table class="striped" style="width:100%;">
                     <thead>
                         <tr>
-                            <td>Titel</td>
-                            <td>Autor(en)</td>
-                            <td>Jahr</td>
-                            <td>Zitate</td>
-                            <td>Aufgaben</td>
+                            <th>Titel</th>
+                            <th>Autor(en)</th>
+                            <th>Jahr</th>
+                            <th>Zitate</th>
+                            <th>Aufgaben</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -1,153 +1,131 @@
-<div class="mdl-grid">
-    <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="bookTitle" name="bookTitle" {{if .Book}} value="{{.Book.Title}}" {{end}}>
-            <label class="mdl-textfield__label" for="bookTitle">Titel des Werkes</label>
+<div class="container-fluid">
+    <div class="row">
+        <div class="input-field col s12 m6">
+            <input class="validate" type="text" id="bookTitle" name="bookTitle" {{if .Book}} value="{{.Book.Title}}" {{end}}>
+            <label for="bookTitle">Titel des Werkes</label>
+        </div>
+        <div class="input-field col s12 m6">
+            <input class="validate" type="text" id="bookSubtitle" name="bookSubtitle" {{if .Book}} value="{{.Book.SubTitle}}" {{end}}>
+            <label for="bookTitle">Untertitel</label>
         </div>
     </div>
-    <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="bookSubtitle" name="bookSubtitle" {{if .Book}} value="{{.Book.SubTitle}}" {{end}}>
-            <label class="mdl-textfield__label" for="bookTitle">Untertitel</label>
+    <div class="row">
+        <div class="input-field col s12 m6">
+            <input class="validate" type="text" id="bookAuthor" name="bookAuthor" {{if .Book}} value="{{.Book.Authors}}" {{end}}>
+            <label for="bookTitle">Autor</label>
+        </div>
+        <div class="input-field col s12 m6">
+            <input class="validate" type="number" id="bookISBN" name="bookISBN" {{if .Book}} value="{{.Book.ISBN}}" {{end}}>
+            <label for="bookISBN">ISBN</label>
         </div>
     </div>
-    <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="bookAuthor" name="bookAuthor" {{if .Book}} value="{{.Book.Authors}}" {{end}}>
-            <label class="mdl-textfield__label" for="bookTitle">Autor</label>
+    <div class="row">
+        <div class="input-field col s12 m6">
+            <input class="validate" type="text" id="bookAddTitle" name="bookAddTitle" {{if .Book}} value="{{.Book.AddTitle}}" {{end}}>
+            <label for="bookAddTitle">Titelzusatz</label>
+        </div>
+        <div class="input-field col s12 m6">
+            <input class="validate" type="text" id="bookAuthoringAssistants" name="bookAuthoringAssistants" {{if .Book}} value="{{.Book.AuthoringAssistants}}" {{end}}>
+            <label for="bookAuthoringAssistants">Authoring Assistants</label>
         </div>
     </div>
-    <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="number" id="bookISBN" name="bookISBN" {{if .Book}} value="{{.Book.ISBN}}" {{end}}>
-            <label class="mdl-textfield__label" for="bookISBN">ISBN</label>
+    <div class="row">
+        <div class="input-field col s12 m6">
+            <input class="validate" type="number" id="bookYear" name="bookYear" {{if .Book}} value="{{.Book.Year}}" {{end}}>
+            <label for="bookYear">Ver&ouml;ffentlichungsjahr</label>
+        </div>
+        <div class="input-field col s12 m6">
+            <input class="validate" type="text" id="bookInstitution" name="bookInstitution" {{if .Book}} value="{{.Book.Institution}}" {{end}}>
+            <label for="bookInstitution">Institut</label>
         </div>
     </div>
-    <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="bookAddTitle" name="bookAddTitle" {{if .Book}} value="{{.Book.AddTitle}}" {{end}}>
-            <label class="mdl-textfield__label" for="bookAddTitle">Titelzusatz</label>
+    <div class="row">
+        <div class="input-field col s12 m6">
+            <input class="validate" type="text" id="bookPublishingLocation" name="bookPublishingLocation" {{if .Book}} value="{{.Book.PublishingLocation}}" {{end}}>
+            <label for="bookPublishingLocation">Ver&ouml;ffentlichungsort</label>
+        </div>
+        <div class="input-field col s12 m6">
+            <input class="validate" type="text" id="bookPublisher" name="bookPublisher" {{if .Book}} value="{{.Book.Publisher}}" {{end}}>
+            <label for="bookPublisher">Verleger</label>
         </div>
     </div>
-    <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="bookAuthoringAssistants" name="bookAuthoringAssistants" {{if .Book}} value="{{.Book.AuthoringAssistants}}" {{end}}>
-            <label class="mdl-textfield__label" for="bookAuthoringAssistants">Authoring Assistants</label>
+    <div class="row">
+        <div class="input-field col s12 m6">
+            <input class="validate" type="number" id="bookNumberOfBooks" name="bookNumberOfBooks" {{if .Book}} value="{{.Book.NumberOfBooks}}" {{end}}>
+            <label for="bookNumberOfBooks">Anzahl B&auml;nde</label>
+        </div>
+        <div class="input-field col s12 m6">
+            <input class="validate" type="text" id="bookEdition" name="bookEdition" {{if .Book}} value="{{.Book.Edition}}" {{end}}>
+            <label for="bookEdition">Auflage</label>
         </div>
     </div>
-    <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="number" id="bookYear" name="bookYear" {{if .Book}} value="{{.Book.Year}}" {{end}}>
-            <label class="mdl-textfield__label" for="bookYear">Ver&ouml;ffentlichungsjahr</label>
+    <div class="row">
+        <div class="input-field col s12 m6">
+            <input type="text" id="bookLineTitle" name="bookLineTitle" {{if .Book}} value="{{.Book.LineTitle}}" {{end}}>
+            <label for="bookLineTitle">Reihentitel</label>
+        </div>
+        <div class="input-field col s12 m6">
+            <input class="validate" type="number" id="bookLineNumber" name="bookLineNumber" {{if .Book}} value="{{.Book.LineBookNo}}" {{end}}>
+            <label for="bookLineNumber">Nummer dieses Buches in der Reihe</label>
         </div>
     </div>
-    <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="bookInstitution" name="bookInstitution" {{if .Book}} value="{{.Book.Institution}}" {{end}}>
-            <label class="mdl-textfield__label" for="bookInstitution">Institut</label>
+    <div class="row">
+        <div class="input-field col s12 m6">
+            <input class="validate" type="url" id="bookAddUrl" name="bookAddUrl" {{if .Book}} value="{{.Book.AdditionalUrl}}" {{end}}>
+            <label for="bookAddUrl">Zus&auml;tzlicher Link</label>
+        </div>
+        <div class="input-field col s12 m6">
+            <input class="datepicker" type="text" id="bookLastChecked" name="bookLastChecked" {{if .Book}} value="{{ .Book.LastChecked }}" {{end}}>
+            <label for="bookLastChecked">Letzte &Uuml;berprüfung</label>
         </div>
     </div>
-    <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="bookPublishingLocation" name="bookPublishingLocation" {{if .Book}} value="{{.Book.PublishingLocation}}" {{end}}>
-            <label class="mdl-textfield__label" for="bookPublishingLocation">Ver&ouml;ffentlichungsort</label>
+    <div class="row">
+        <div class="input-field col s12 m6">
+            <input class="datepicker" type="text" id="bookFirstPublished" name="bookFirstPublished" {{if .Book}} value="{{.Book.FirstPublished}}" {{end}}>
+            <label for="bookFirstPublished">Erste Ver&ouml;ffentlichung</label>
+        </div>
+        <div class="input-field col s12 m6">
+            <input class="validate" type="text" id="bookLanguage" name="bookLanguage" {{if .Book}} value="{{.Book.Language}}" {{end}}>
+            <label for="bookLanguage">Sprache</label>
         </div>
     </div>
-    <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="bookPublisher" name="bookPublisher" {{if .Book}} value="{{.Book.Publisher}}" {{end}}>
-            <label class="mdl-textfield__label" for="bookPublisher">Verleger</label>
+    <div class="row">
+        <div class="input-field col s12 m6">
+            <input class="validate" type="number" id="bookPrice" name="bookPrice" {{if .Book}} value="{{.Book.Price}}" {{end}}>
+            <label for="bookPrice">Preis</label>
+        </div>
+        <div class="input-field col s12 m6">
+            <textarea class="materialize-textarea" type="text" rows= "3" id="bookNotes" name="bookNotes">{{if .Book}}{{.Book.Notes}}{{end}}</textarea>
+            <label for="bookNotes">Notizen</label>
         </div>
     </div>
-    <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="number" id="bookNumberOfBooks" name="bookNumberOfBooks" {{if .Book}} value="{{.Book.NumberOfBooks}}" {{end}}>
-            <label class="mdl-textfield__label" for="bookNumberOfBooks">Anzahl B&auml;nde</label>
+    <div class="row">
+        <div class="input-field col s12 m12">
+            <textarea class="materialize-textarea" type="text" rows= "3" id="bookAbstract" name="bookAbstract">{{if .Book}}{{.Book.Abstract}}{{end}}</textarea>
+            <label for="bookAbstract">Abstrakt</label>
         </div>
     </div>
-    <div class="form-control mdl-cell--12-col-phone mdl-cell--6-col-tablet  mdl-cell--4-col-desktop">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="bookEdition" name="bookEdition" {{if .Book}} value="{{.Book.Edition}}" {{end}}>
-            <label class="mdl-textfield__label" for="bookEdition">Auflage</label>
+    <div class="row">
+        <div class="input-field col s12 m12">
+            <textarea class="materialize-textarea" type="text" rows= "3" id="bookToc" name="bookToc">{{if .Book}}{{.Book.ToC}}{{end}}</textarea>
+            <label for="bookToc">Inhaltsverzeichnis</label>
         </div>
     </div>
-    <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="bookLineTitle" name="bookLineTitle" {{if .Book}} value="{{.Book.LineTitle}}" {{end}}>
-            <label class="mdl-textfield__label" for="bookLineTitle">Reihentitel</label>
+    <div class="row">
+        <div class="input-field col s12 m6">
+            <input type="text" id="bookTags" name="bookTags" {{if .Book}} value="{{range .Book.Tags }}{{.}},{{end}}" {{end}}>
+            <label for="bookTags">Tags</label>
+        </div>
+        <div class="input-field col s12 m6">
+            <input type="text" id="bookCategories" name="bookCategories" {{if .Book}} value="{{range .Book.Categories }}{{.}},{{end}}" {{end}}>
+            <label for="bookCategories">Kategorien</label>
         </div>
     </div>
-    <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="number" id="bookLineNumber" name="bookLineNumber" {{if .Book}} value="{{.Book.LineBookNo}}" {{end}}>
-            <label class="mdl-textfield__label" for="bookLineNumber">Nummer dieses Buches in der Reihe</label>
+    <div class="row">
+        <div class="input-field col s12 m6">
+            <input type="text" id="bookReferences" name="bookReferences" {{if .Book}} value="{{range .Book.References }}{{ . }},{{end}}" {{end}}>
+            <label for="bookReferences">Referenzen</label>
         </div>
     </div>
-    <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="url" id="bookAddUrl" name="bookAddUrl" {{if .Book}} value="{{.Book.AdditionalUrl}}" {{end}}>
-            <label class="mdl-textfield__label" for="bookAddUrl">Zus&auml;tzlicher Link</label>
-        </div>
-    </div>
-    <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="date" id="bookLastChecked" name="bookLastChecked" {{if .Book}} value="{{ .Book.LastChecked }}" {{end}}>
-            <label class="mdl-textfield__label" for="bookLastChecked">Letzte &Uuml;berprüfung</label>
-        </div>
-    </div>
-    <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="date" id="bookFirstPublished" name="bookFirstPublished" {{if .Book}} value="{{.Book.FirstPublished}}" {{end}}>
-            <label class="mdl-textfield__label" for="bookFirstPublished">Erste Ver&ouml;ffentlichung</label>
-        </div>
-    </div>
-    <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="bookLanguage" name="bookLanguage" {{if .Book}} value="{{.Book.Language}}" {{end}}>
-            <label class="mdl-textfield__label" for="bookLanguage">Sprache</label>
-        </div>
-    </div>
-    <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="number" id="bookPrice" name="bookPrice" {{if .Book}} value="{{.Book.Price}}" {{end}}>
-            <label class="mdl-textfield__label" for="bookPrice">Preis</label>
-        </div>
-    </div>
-    <div class="form-control mdl-cell--3-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
-        <div class="mdl-textfield mdl-js-textfield">
-            <textarea class="mdl-textfield__input" type="text" rows= "3" id="bookNotes" name="bookNotes">{{if .Book}}{{.Book.Notes}}{{end}}</textarea>
-            <label class="mdl-textfield__label" for="bookNotes">Notizen</label>
-        </div>
-    </div>
-    <div class="form-control mdl-cell--3-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
-        <div class="mdl-textfield mdl-js-textfield">
-            <textarea class="mdl-textfield__input" type="text" rows= "3" id="bookAbstract" name="bookAbstract">{{if .Book}}{{.Book.Abstract}}{{end}}</textarea>
-            <label class="mdl-textfield__label" for="bookAbstract">Abstrakt</label>
-        </div>
-    </div>
-    <div class="form-control mdl-cell--3-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
-        <div class="mdl-textfield mdl-js-textfield">
-            <textarea class="mdl-textfield__input" type="text" rows= "3" id="bookToc" name="bookToc">{{if .Book}}{{.Book.ToC}}{{end}}</textarea>
-            <label class="mdl-textfield__label" for="bookToc">Inhaltsverzeichnis</label>
-        </div>
-    </div>
-    <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="bookTags" name="bookTags" {{if .Book}} value="{{range .Book.Tags }}{{.}},{{end}}" {{end}}>
-            <label class="mdl-textfield__label" for="bookTags">Tags</label>
-        </div>
-    </div>
-    <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="bookCategories" name="bookCategories" {{if .Book}} value="{{range .Book.Categories }}{{.}},{{end}}" {{end}}>
-            <label class="mdl-textfield__label" for="bookCategories">Kategorien</label>
-        </div>
-    </div>
-    <div class="form-control mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-cell--4-col-desktop">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="bookReferences" name="bookReferences" {{if .Book}} value="{{range .Book.References }}{{ . }},{{end}}" {{end}}>
-            <label class="mdl-textfield__label" for="bookReferences">Referenzen</label>
-        </div>
-    </div>
-    <input class="mdl-cell--hide-tablet mdl-cell--hide-tablet mdl-cell--hide-desktop" type="hidden" name="checkField" value="{{ .CheckStr }}">
+    <input class="hide" type="hidden" name="checkField" value="{{ .CheckStr }}">
 </div>

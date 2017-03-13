@@ -1,21 +1,21 @@
 {{ template "frame_header.html" . }}
 
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+<div class="container-fluid">
     {{ template "frame_menu.html" . }}
-    <main class="mdl-layout__content">
-        <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--12-col mdl-cell--10-col-desktop mdl-cell--1-offset-desktop">
+    <main class="container">
+        <div class="row">
+            <div class="col s12 m10 push-m1">
                 <h2>Werk hinzuf&uuml;gen</h2>
                 <p>F&uuml;ge ein Werk der Bibliothek hinzu</p>
 
                 <form class="form" action="/books/add" method="post" name="form_books-add">
                     {{ template "books-form.html" . }}
-                    <div class="mdl-grid">
-                        <div class="form-control mdl-cell--3-col-tablet mdl-cell--6-col-phone mdl-cell--2-col-desktop">
-                            <button type="reset" class="mdl-button mdl-js-button mdl-js-ripple-effect">Abbrechen</button>
+                    <div class="row">
+                        <div class="col m3 s6 l2">
+                            <button type="reset" class="waves-effect waves-purple btn-flat">Abbrechen</button>
                         </div>
-                        <div class="form-control mdl-cell--6-offset-tablet mdl-cell--3-col-tablet mdl-cell--6-col-phone mdl-cell--8-offset-desktop mdl-cell--2-col-desktop">
-                            <button type="submit" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">Hinzuf&uuml;gen</button>
+                        <div class="col m3 offset-m8 s6 l2 offset-l8">
+                            <button type="submit" class="waves-effect waves-light btn">Hinzuf&uuml;gen</button>
                         </div>
                     </div>
                 </form>

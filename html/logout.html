@@ -1,35 +1,24 @@
 {{ template "frame_header.html" . }}
 
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-    <header class="mdl-layout__header mdl-layout__header--waterfall portfolio-header">
-        <div class="mdl-layout__header-row portfolio-logo-row">
-                <span class="mdl-layout__title">
-                    <div class="portfolio-logo"></div>
-                    <span class="mdl-layout__title">CitationDB</span>
-                </span>
-        </div>
-    </header>
-    <main class="mdl-layout__content">
-        <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--4-col">&nbsp;</div>
-        </div>
-        <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--4-col">&nbsp;</div>
-            <div class="mdl-cell mdl-cell--4-col">
-                <div class="cdb_login-card mdl-card mdl-shadow--2dp">
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">Abgemeldet</h2>
+<div class="container-fluid">
+    <nav>
+        <header class="container">
+            <div class="nav-wrapper">
+                <a href="/" class="brand-logo">{{ .Title }} CitationDB</a>
+            </div>
+        </header>
+    </nav>
+    <main class="container">
+        <div class="valign-wrapper">
+            <div class="valign cdb_login-card card">
+                <div class="card-content">
+                    <div class="card-title">
+                        <h2>Abgemeldet!</h2>
                     </div>
-                    <div class="mdl-card__supporting-text">
-                        <p>Sie wurden erfolgreich abgemeldet.</p>
-                        <p>Zur erneuten Anmeldung, bitte <a href="/">hier</a> klicken</p>
-                    </div>
+                    <p>Sie wurden erfolgreich angemeldet.</p>
+                    <p>Sie sollten in K&uuml;rze weitergeleitet werden - Falls nicht, bitte <a href="{{.TargetUrl}}">hier</a> klicken</p>
                 </div>
             </div>
-            <div class="mdl-cell mdl-cell--4-col">&nbsp;</div>
-        </div>
-        <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--4-col">&nbsp;</div>
         </div>
     </main>
 </div>

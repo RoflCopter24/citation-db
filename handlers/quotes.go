@@ -31,17 +31,20 @@ func HandleQuotesSearch(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleQuotesSearchGET(w http.ResponseWriter, r *http.Request) {
-
+	user := context.Get(r, "User").(*models.User)
 	pData := models.Page{}
 	pData.Title = "Zitate durchsuchen"
+	pData.User = user;
 
 	tpl, _ := template.ParseGlob("html/*.html")
 	tpl.ExecuteTemplate(w, "quotes-search.html", pData)
 }
 
 func handleQuotesSearchPOST(w http.ResponseWriter, r *http.Request) {
+	user := context.Get(r, "User").(*models.User)
 	pData := models.Page{}
 	pData.Title = "Suchergebnisse"
+	pData.User = user;
 
 	tpl, _ := template.ParseGlob("html/*.html")
 	tpl.ExecuteTemplate(w, "quotes-results.html", pData)
@@ -56,9 +59,11 @@ func HandleQuotesAdd(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleQuotesAddGET(w http.ResponseWriter, r *http.Request) {
+	user := context.Get(r, "User").(*models.User)
 
 	pData := models.PageQuoteEdit{}
 	pData.Title = "Zitat einpflegen"
+	pData.User = user;
 
 	tpl, _ := template.ParseGlob("html/*.html")
 	tpl.ExecuteTemplate(w, "quotes-add.html", pData)
@@ -69,6 +74,7 @@ func handleQuotesAddPOST(w http.ResponseWriter, r *http.Request) {
 	pData.Title = "Zitat einpflegen"
 
 	user := context.Get(r, "User").(*models.User)
+	pData.User = user;
 
 	quote := models.Quotation{}
 
@@ -118,26 +124,30 @@ func HandleQuotesEdit(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleQuotesEditGET(w http.ResponseWriter, r *http.Request) {
-
+	user := context.Get(r, "User").(*models.User)
 	pData := models.Page{}
 	pData.Title = "Zitat bearbeiten"
+	pData.User = user
 
 	tpl, _ := template.ParseGlob("html/*.html")
 	tpl.ExecuteTemplate(w, "quotes-edit.html", pData)
 }
 
 func handleQuotesEditPOST(w http.ResponseWriter, r *http.Request) {
+	user := context.Get(r, "User").(*models.User)
 	pData := models.Page{}
 	pData.Title = "Zitat bearbeiten"
+	pData.User = user
 
 	tpl, _ := template.ParseGlob("html/*.html")
 	tpl.ExecuteTemplate(w, "quotes-edit.html", pData)
 }
 
 func HandleQuotesRemove(w http.ResponseWriter, r *http.Request) {
-
+	user := context.Get(r, "User").(*models.User)
 	pData := models.Page{}
 	pData.Title = "Zitat entfernen"
+	pData.User = user
 
 	tpl, _ := template.ParseGlob("html/*.html")
 	tpl.ExecuteTemplate(w, "quotes-edit.html", pData)
