@@ -12,6 +12,7 @@ import (
 	"strconv"
 	"github.com/goincremental/negroni-sessions"
 	"gopkg.in/mgo.v2/bson"
+	"encoding/json"
 )
 
 func HandleBooksAdd (writer http.ResponseWriter, request *http.Request) {
@@ -145,8 +146,9 @@ func HandleBooksEdit (writer http.ResponseWriter, request *http.Request) {
 }
 
 func handleBooksEditGET (w http.ResponseWriter, r *http.Request) {
-
+	u := context.Get(r,"User").(*models.User)
 	pData := models.PageBookEdit{}
+	pData.User = u
 	if len(r.URL.Path) < len("/books/edit/a") {
 		pData.Error = "Kein Werk ausgewählt!"
 		pData.Title = "Fehler"
@@ -173,8 +175,9 @@ func handleBooksEditGET (w http.ResponseWriter, r *http.Request) {
 }
 
 func handleBooksEditPOST (w http.ResponseWriter, r *http.Request) {
-
+	u := context.Get(r,"User").(*models.User)
 	pData := models.PageBookEdit{}
+	pData.User = u
 	if len(r.URL.Path) < len("/books/edit/a") {
 		pData.Error = "Kein Werk ausgewählt!"
 		pData.Title = "Fehler"
@@ -219,6 +222,7 @@ func HandleBooksDelete (w http.ResponseWriter, r *http.Request) {
 	pData := models.Page{}
 
 	user := context.Get(r, "User").(*models.User)
+	pData.User = user
 
 	if user.Role < 1 {
 		pData.Error = "Sie sind nicht berechtigt, diese Aktion durchzuführen"
@@ -247,6 +251,40 @@ func HandleBooksDelete (w http.ResponseWriter, r *http.Request) {
 
 	tpl, _ := template.ParseGlob("html/*.html")
 	tpl.ExecuteTemplate(w, "books-del.html", pData)
+}
+
+func HandleBooksSearchJSON(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	req := r.FormValue("query")
+	limit, errLim := strconv.Atoi(r.FormValue("limit"))
+	if errLim != nil {
+		limit = 10
+	}
+
+	res := models.JsonBookSearchResult{}
+
+	db := context.Get(r, "db").(*mgo.Database)
+	err := db.C("books").Find(bson.M{ "title": bson.M{"$regex": req } }).Limit(limit).All(&res.Results)
+
+	if err != nil {
+		js, errE := json.Marshal(res)
+		if errE != nil {
+			panic(err)
+		}
+		http.Error(w, string(js), http.StatusBadRequest)
+		return
+	}
+
+	res.MaxCount = limit
+
+	js, errJ := json.Marshal(res)
+
+	if errJ != nil {
+		panic(errJ)
+	}
+
+	w.Write(js)
 }
 
 func BookObjFromPost(r *http.Request) models.Book {

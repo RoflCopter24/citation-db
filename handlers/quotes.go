@@ -9,6 +9,7 @@ import (
 	"time"
 	"strings"
 	"strconv"
+	"gopkg.in/mgo.v2"
 )
 
 func HandleQuotesIndex(w http.ResponseWriter, r *http.Request) {
@@ -74,7 +75,16 @@ func handleQuotesAddPOST(w http.ResponseWriter, r *http.Request) {
 	pData.Title = "Zitat einpflegen"
 
 	user := context.Get(r, "User").(*models.User)
-	pData.User = user;
+	pData.User = user
+
+	bookId := r.PostFormValue("selectedBook")
+
+	if bookId == "" {
+		pData.Error = "Kein Werk ausgewählt!"
+		tpl, _ := template.ParseGlob("html/*.html")
+		tpl.ExecuteTemplate(w, "quotes-add.html", pData)
+		return
+	}
 
 	quote := models.Quotation{}
 
@@ -110,6 +120,22 @@ func handleQuotesAddPOST(w http.ResponseWriter, r *http.Request) {
 		t = 0
 	}
 	quote.Type = t
+
+	db := context.Get(r, "db").(*mgo.Database)
+	book := models.Book{}
+	err := db.C("books").Find(bson.M{ "_id": bookId}).One(&book)
+
+	if err != nil {
+		pData.Error = "Kein werk mit dieser ID!"
+	} else {
+		book.Quotations = append(book.Quotations, quote)
+
+		errI := db.C("books").UpdateId(bookId, &book)
+
+		if errI != nil {
+			panic(errI)
+		}
+	}
 
 	tpl, _ := template.ParseGlob("html/*.html")
 	tpl.ExecuteTemplate(w, "quotes-add.html", pData)

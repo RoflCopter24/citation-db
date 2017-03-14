@@ -8,7 +8,7 @@
             <div class="col s12">
                 <h1>Liste aller registrierten Werke</h1>
 
-                <table class="striped" style="width:100%;">
+                <table class="highlight" style="width:100%;">
                     <thead>
                         <tr>
                             <th>Titel</th>
@@ -20,7 +20,7 @@
                     </thead>
                     <tbody>
                         {{ range .Books }}
-                        <tr data-id="{{ .Id }}">
+                        <tr class="cdb-books-list-entry" data-id="{{ .Id }}">
                             <td>{{ .Title }}</td>
                             <td>{{ .Authors }}</td>
                             <td>{{ .Year }}</td>

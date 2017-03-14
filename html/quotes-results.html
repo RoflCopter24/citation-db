@@ -1,18 +1,19 @@
 {{ template "frame_header.html" . }}
 
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+<div class="container-fluid">
     {{ template "frame_menu.html" . }}
-    <main class="mdl-layout__content">
-        <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--12-col mdl-cell--10-col-desktop mdl-cell--1-offset-desktop">
+    <main class="container">
+        <div class="row">
+            <div class="col s12">
                 <h2>Zitate durchsuchen</h2>
 
                 {{ if .Error }}
-                <p><b>{{ .Error }}</b></p>
+                <p class="error"><b>{{ .Error }}</b></p>
                 {{ end }}
 
 
             </div>
+            {{ template "frame_fixedfabs.html" . }}
         </div>
     </main>
 </div>

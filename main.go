@@ -82,6 +82,7 @@ func main() {
 	mux.HandleFunc("/books/", handlers.HandleBooksIndex)
 
 	mux.HandleFunc("/books/list", handlers.HandleBooksList)
+	mux.HandleFunc("/books/search", handlers.HandleBooksSearchJSON)
 
 	mux.HandleFunc("/books/edit", handlers.HandleBooksEdit)
 	mux.HandleFunc("/books/edit/", handlers.HandleBooksEdit)
