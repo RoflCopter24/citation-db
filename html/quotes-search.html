@@ -11,7 +11,36 @@
                 <p class="error"><b>{{ .Error }}</b></p>
                 {{ end }}
 
-
+                <form class="form" action="/quotes/search" method="post">
+                    <div class="row">
+                        <div class="input-field col s12 m6">
+                            <input type="text" class="autocomplete" id="searchBook" name="searchBook">
+                            <label for="searchBook">Werk</label>
+                        </div>
+                        <div class="input-field col s12 m6">
+                            <input type="text" id="searchText" name="searchText">
+                            <label for="searchText">Inhalt</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 m6">
+                            <input type="text" id="searchTags" name="searchTags">
+                            <label for="searchTags">Schlagw&ouml;rter</label>
+                        </div>
+                        <div class="input-field col s12 m6">
+                            <input type="text" id="searchCategories" name="searchCategories">
+                            <label for="searchCategories">Kategorien</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6 m3">
+                            <button type="reset" class="waves-effect waves-purple btn-flat">Zur&uuml;cksetzen</button>
+                        </div>
+                        <div class="col s6 m3 offset-m6">
+                            <button type="submit" class="waves-effect waves-light btn">Absenden</button>
+                        </div>
+                    </div>
+                </form>
             </div>
             {{ template "frame_fixedfabs.html" . }}
         </div>

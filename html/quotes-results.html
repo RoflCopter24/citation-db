@@ -5,13 +5,34 @@
     <main class="container">
         <div class="row">
             <div class="col s12">
-                <h2>Zitate durchsuchen</h2>
+                <h2>Suchergebnisse</h2>
 
                 {{ if .Error }}
                 <p class="error"><b>{{ .Error }}</b></p>
                 {{ end }}
 
-
+                <table class="highlight">
+                    <thead>
+                        <tr>
+                            <th>Werk</th>
+                            <th>Core Statement</th>
+                            <th>Text</th>
+                            <th>Seite Von</th>
+                            <th>Seite Bis</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{ range .Quotes }}
+                        <tr class="hoverable" data-id="{{.Id}}">
+                            <td>Not implemented</td>
+                            <td>{{.CoreStatement}}</td>
+                            <td class="truncate">{{.Text}}</td>
+                            <td>{{.PageNrStart}}</td>
+                            <td>{{.PageNrStop}}</td>
+                        </tr>
+                        {{ end }}
+                    </tbody>
+                </table>
             </div>
             {{ template "frame_fixedfabs.html" . }}
         </div>
