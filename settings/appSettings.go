@@ -50,7 +50,7 @@ func (s *AppSettings) Default() {
 
 	// App settings
 	s.WorkingDir	= os.Getenv("WORKINGDIR")
-	s.Port		= 80
+	s.Port		= 8080
 }
 
 func (s *AppSettings) GenMgoConnStr() string {
