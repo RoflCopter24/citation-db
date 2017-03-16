@@ -38,7 +38,7 @@ func (ac *AuthChecker) Middleware() negroni.HandlerFunc {
 		if u == nil {
 			context.Set(request, "TargetUrl", request.RequestURI)
 			session.Set("TargetUrl", request.RequestURI)
-			http.Redirect(writer, request, "/login", 401)
+			http.Redirect(writer, request, "/login", 302)
 			return
 		}
 
