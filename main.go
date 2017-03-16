@@ -14,6 +14,7 @@ import (
 	"github.com/goincremental/negroni-sessions/cookiestore"
 	"log"
 	"os"
+	"strconv"
 )
 
 var (
@@ -115,5 +116,5 @@ func main() {
 		os.Chdir(appSettings.WorkingDir)
 	}
 	n.UseHandler(mux)
-	n.Run(":8080")
+	n.Run(":" + strconv.Itoa(appSettings.Port))
 }
