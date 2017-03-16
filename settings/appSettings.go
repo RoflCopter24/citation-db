@@ -1,6 +1,10 @@
 package settings
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+	"strconv"
+)
 
 type AppSettings struct {
 	// DbServer is the hostname of the MongoDB server
@@ -25,8 +29,19 @@ func (s *AppSettings) LffOrDefault() {
 
 func (s *AppSettings) Default() {
 	// Default Mongo settings
-	s.DbServer 	= "127.0.0.1"
-	s.DbPort	= 27017
+
+	envServer := os.Getenv("MONGO_DB")
+	if envServer == "" {
+		envServer = "127.0.0.1"
+	}
+
+	envPort := os.Getenv("MONGO_DB_PORT")
+	if envPort == "" {
+		envPort = "27017"
+	}
+
+	s.DbServer 	= envServer
+	s.DbPort,_	= strconv.Atoi(envPort)
 	s.DbName	= "citation"
 	s.DbUser	= ""
 	s.DbPass	= ""
