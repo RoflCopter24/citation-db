@@ -72,12 +72,26 @@ func handleQuotesSearchPOST(w http.ResponseWriter, r *http.Request) {
 		}
 
 	} else {
-		query := bson.M{"$or": []bson.M{
-			{ "quotes.coreStatement": 	qText},
-			{ "quotes.text": 		qText},
-			{ "quotes.tags":		qTags},
-			{ "quotes.categories":		qCats},
-		}}
+		query := bson.M{ "$and": []bson.M{ {"$or" : []bson.M{
+			{"$and": []bson.M{ // Username matches and group flag not set
+					{"quotes.permissions.userId": user.Username },
+					{"quotes.permissions.group": false },
+			}},
+			{"$and":[]bson.M{ // Group matches and group flag is set
+						{"quotes.permissions.groupId": 0 },
+						{"quotes.permissions.group": true },
+			}},
+		},},},
+			"$or": []bson.M{
+				{ "$or": []bson.M {
+					{ "quotes.coreStatement": 	qText},
+					{ "quotes.text": 		qText},
+				}},
+				{ "quotes.tags":		qTags},
+				{ "quotes.categories":		qCats},
+			},
+		}
+
 		//pipe := db.C("books").Pipe([]bson.M{{"$match": bson.M{"quotes.coreStatement":"John"},}})
 		//resp := []bson.M{}
 		//err := pipe.All(&resp)
