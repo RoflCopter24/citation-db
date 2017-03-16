@@ -17,8 +17,12 @@ RUN go get github.com/goincremental/negroni-sessions/cookiestore
 RUN go get github.com/joeljames/nigroni-mgo-session
 RUN go install github.com/RoflCopter24/citation-db
 
+RUN mv /go/src/github.com/RoflCopter24/citation-db/html /srv/html
+RUN mv /go/src/github.com/RoflCopter24/citation-db/public /srv/public
+
 ENV MONGO_DB 127.0.0.1
 ENV MONGO_DB_PORT 27017
+ENV WORKINGDIR /srv
 
 # Run the outyet command by default when the container starts.
 ENTRYPOINT /go/bin/citation-db

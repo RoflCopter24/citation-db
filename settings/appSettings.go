@@ -21,6 +21,8 @@ type AppSettings struct {
 	DbPass		string
 	// Port of the CitationDB server
 	Port		int
+	// Working directory
+	WorkingDir	string
 }
 
 func (s *AppSettings) LffOrDefault() {
@@ -47,6 +49,7 @@ func (s *AppSettings) Default() {
 	s.DbPass	= ""
 
 	// App settings
+	s.WorkingDir	= os.Getenv("WORKINGDIR")
 	s.Port		= 8080
 }
 

@@ -12,6 +12,8 @@ import (
 	"github.com/RoflCopter24/citation-db/handlers"
 	"gopkg.in/mgo.v2"
 	"github.com/goincremental/negroni-sessions/cookiestore"
+	"log"
+	"os"
 )
 
 var (
@@ -108,6 +110,10 @@ func main() {
 		http.ServeFile(w, r, "favicon.ico")
 	})
 
+	log.Println(os.Getwd())
+	if appSettings.WorkingDir != "" {
+		os.Chdir(appSettings.WorkingDir)
+	}
 	n.UseHandler(mux)
 	n.Run(":8080")
 }

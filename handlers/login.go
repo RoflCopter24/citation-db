@@ -18,8 +18,6 @@ func HandleLogin(w http.ResponseWriter, r *http.Request) {
 	} else if r.Method == "POST" {
 		handleLoginPOST(w, r)
 	}
-
-
 }
 
 func handleLoginGET(w http.ResponseWriter, r *http.Request) {
@@ -45,7 +43,12 @@ func handleLoginPOST(w http.ResponseWriter, r *http.Request) {
 
 	// You can access the mgo db object from the request object.
 	// The db object is stored in key `db`.
-	db := context.Get(r, "db").(*mgo.Database)
+	dbI := context.Get(r, "db")
+	if dbI == nil {
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
+		return
+	}
+	db := dbI.(*mgo.Database)
 	// Now lets perform a count query using mgo db object.
 
 	user := models.User{}
