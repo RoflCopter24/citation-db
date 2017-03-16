@@ -2,6 +2,8 @@
 # and a workspace (GOPATH) configured at /go.
 FROM golang
 
+RUN apt-get update && apt-get install mc mongodb --yes
+
 # Copy the local package files to the container's workspace.
 ADD . /go/src/github.com/RoflCopter24/citation-db
 
@@ -23,6 +25,12 @@ RUN mv /go/src/github.com/RoflCopter24/citation-db/public /srv/public
 ENV MONGO_DB 127.0.0.1
 ENV MONGO_DB_PORT 27017
 ENV WORKINGDIR /srv
+
+VOLUME /var/lib/mongodb/db
+VOLUME /var/uploads
+
+RUN systemctl enable mongodb.service
+RUN service mongodb start
 
 # Run the outyet command by default when the container starts.
 ENTRYPOINT /go/bin/citation-db
