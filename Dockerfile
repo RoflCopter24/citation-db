@@ -16,7 +16,7 @@ RUN go get gopkg.in/mgo.v2/bson
 RUN go get github.com/gorilla/context
 RUN go get github.com/goincremental/negroni-sessions
 RUN go get github.com/goincremental/negroni-sessions/cookiestore
-RUN go get github.com/joeljames/nigroni-mgo-session
+#RUN go get github.com/joeljames/nigroni-mgo-session
 RUN go install github.com/RoflCopter24/citation-db
 
 RUN mv /go/src/github.com/RoflCopter24/citation-db/html /srv/html
@@ -29,8 +29,8 @@ ENV WORKINGDIR /srv
 VOLUME /var/lib/mongodb/db
 VOLUME /var/uploads
 
-RUN systemctl enable mongodb.service
-RUN service mongodb start
+#RUN systemctl enable mongodb.service
+#RUN service mongodb start
 
 # Run the outyet command by default when the container starts.
 ENTRYPOINT /go/bin/citation-db

@@ -5,16 +5,17 @@ import (
 	"net/http"
 
 	"github.com/urfave/negroni"
-	mgosession "github.com/joeljames/nigroni-mgo-session"
+	mgosession "github.com/RoflCopter24/citation-db/nigronimgosession"
 	"github.com/goincremental/negroni-sessions"
 	"github.com/RoflCopter24/citation-db/settings"
 	"github.com/RoflCopter24/citation-db/middleware"
 	"github.com/RoflCopter24/citation-db/handlers"
 	"gopkg.in/mgo.v2"
-	"github.com/goincremental/negroni-sessions/cookiestore"
 	"log"
 	"os"
 	"strconv"
+	"github.com/goincremental/negroni-sessions/mongostore"
+	"github.com/gorilla/securecookie"
 )
 
 var (
@@ -47,15 +48,15 @@ func main() {
 	n := negroni.Classic()
 
 	// Setup MongoDb connection stuff
-	_ = setupMgo(n, &appSettings)
+	s := setupMgo(n, &appSettings)
 
 
 	n.Use(negroni.NewRecovery())
 
 	n.Use(negroni.NewLogger())
 
-	//store := mongostore.New(*s, appSettings.DbName, "sessions", 900000, true, securecookie.GenerateRandomKey(16), securecookie.GenerateRandomKey(16))
-	store := cookiestore.New([]byte("citation-db.C_Store01"))
+	store := mongostore.New(*s, appSettings.DbName, "sessions", 900000, true, securecookie.GenerateRandomKey(16), securecookie.GenerateRandomKey(16))
+	//store := cookiestore.New([]byte("citation-db.C_Store01"))
 	n.Use(sessions.Sessions("CitationSession", store))
 
 	whiteList := make([]string,5)

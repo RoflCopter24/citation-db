@@ -34,7 +34,7 @@ func (s *AppSettings) Default() {
 
 	envServer := os.Getenv("MONGO_DB")
 	if envServer == "" {
-		envServer = "127.0.0.1"
+		envServer = "localhost"
 	}
 
 	envPort := os.Getenv("MONGO_DB_PORT")

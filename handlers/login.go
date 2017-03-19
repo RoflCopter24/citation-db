@@ -9,6 +9,7 @@ import (
 	"gopkg.in/mgo.v2/bson"
 	"golang.org/x/crypto/bcrypt"
 	"github.com/goincremental/negroni-sessions"
+	"log"
 )
 
 func HandleLogin(w http.ResponseWriter, r *http.Request) {
@@ -44,6 +45,7 @@ func handleLoginPOST(w http.ResponseWriter, r *http.Request) {
 	// You can access the mgo db object from the request object.
 	// The db object is stored in key `db`.
 	dbI := context.Get(r, "db")
+	log.Println(context.Get(r, "mgoSession"))
 	if dbI == nil {
 		http.Error(w, "Internal server error", http.StatusInternalServerError)
 		return
