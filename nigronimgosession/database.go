@@ -4,7 +4,6 @@ import (
 	"net/http"
 
 	"github.com/urfave/negroni"
-	"log"
 )
 
 type Database struct {
@@ -19,7 +18,6 @@ func (d *Database) Middleware() negroni.HandlerFunc {
 	return func(writer http.ResponseWriter, request *http.Request, next http.HandlerFunc) {
 		reqSession := d.dba.Clone()
 		defer reqSession.Close()
-		log.Println(reqSession)
 		d.dba.Set(request, reqSession)
 		next(writer, request)
 	}

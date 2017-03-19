@@ -8,7 +8,7 @@ import (
 	"github.com/gorilla/context"
 	"gopkg.in/mgo.v2/bson"
 	"golang.org/x/crypto/bcrypt"
-	"github.com/goincremental/negroni-sessions"
+	"github.com/RoflCopter24/negroni-sessions"
 	"log"
 )
 

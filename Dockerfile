@@ -14,9 +14,8 @@ RUN go get golang.org/x/crypto/bcrypt
 RUN go get gopkg.in/mgo.v2
 RUN go get gopkg.in/mgo.v2/bson
 RUN go get github.com/gorilla/context
-RUN go get github.com/goincremental/negroni-sessions
-RUN go get github.com/goincremental/negroni-sessions/cookiestore
-#RUN go get github.com/joeljames/nigroni-mgo-session
+RUN go get github.com/RoflCopter24/negroni-sessions
+RUN go get github.com/RoflCopter24/negroni-sessions/cookiestore
 RUN go install github.com/RoflCopter24/citation-db
 
 RUN mv /go/src/github.com/RoflCopter24/citation-db/html /srv/html

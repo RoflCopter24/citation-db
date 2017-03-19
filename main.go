@@ -6,7 +6,7 @@ import (
 
 	"github.com/urfave/negroni"
 	mgosession "github.com/RoflCopter24/citation-db/nigronimgosession"
-	"github.com/goincremental/negroni-sessions"
+	"github.com/RoflCopter24/negroni-sessions"
 	"github.com/RoflCopter24/citation-db/settings"
 	"github.com/RoflCopter24/citation-db/middleware"
 	"github.com/RoflCopter24/citation-db/handlers"
@@ -14,7 +14,7 @@ import (
 	"log"
 	"os"
 	"strconv"
-	"github.com/goincremental/negroni-sessions/mongostore"
+	"github.com/RoflCopter24/negroni-sessions/mongostore"
 	"github.com/gorilla/securecookie"
 )
 

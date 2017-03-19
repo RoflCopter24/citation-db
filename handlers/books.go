@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 	"strconv"
-	"github.com/goincremental/negroni-sessions"
+	"github.com/RoflCopter24/negroni-sessions"
 	"gopkg.in/mgo.v2/bson"
 	"encoding/json"
 )

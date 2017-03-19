@@ -6,7 +6,7 @@ import (
 	"github.com/gorilla/context"
 	"github.com/RoflCopter24/citation-db/models"
 	_"gopkg.in/mgo.v2"
-	"github.com/goincremental/negroni-sessions"
+	"github.com/RoflCopter24/negroni-sessions"
 	"strings"
 	_"fmt"
 	"gopkg.in/mgo.v2"
