@@ -11,6 +11,7 @@ import (
 	_"fmt"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
+	"log"
 )
 
 type AuthChecker struct {
@@ -56,7 +57,7 @@ func (ac *AuthChecker) Middleware() negroni.HandlerFunc {
 			err := db.C("users").Find(bson.M{"username": uName }).One(&user)
 
 			if err != nil {
-				panic(err)
+				log.Fatal(err, uName)
 			}
 		}
 

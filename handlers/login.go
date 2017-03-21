@@ -26,7 +26,7 @@ func handleLoginGET(w http.ResponseWriter, r *http.Request) {
 
 	tpl, err := template.ParseFiles("html/frame_footer.html", "html/frame_header.html", "html/login.html")
 	if err != nil {
-		panic(err)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 	}
 	tpl.ExecuteTemplate(w, "login.html", data)
 }
@@ -36,7 +36,10 @@ func handleLoginPOST(w http.ResponseWriter, r *http.Request) {
 
 	err1 := r.ParseForm()
 	if err1 != nil {
-		panic(err1)
+		log.Fatal(err1)
+		data.Error= "Form data was invalid!"
+		renderLoginTpl(data,w)
+		return
 	}
 
 	userName := r.PostFormValue("username")
@@ -47,7 +50,9 @@ func handleLoginPOST(w http.ResponseWriter, r *http.Request) {
 	dbI := context.Get(r, "db")
 	log.Println(context.Get(r, "mgoSession"))
 	if dbI == nil {
-		http.Error(w, "Internal server error", http.StatusInternalServerError)
+		log.Fatal("Database Object is nil!")
+		data.Error = "Database connection failed"
+		renderLoginTpl(data, w)
 		return
 	}
 	db := dbI.(*mgo.Database)
@@ -78,12 +83,10 @@ func handleLoginPOST(w http.ResponseWriter, r *http.Request) {
 			data.TargetUrl = tUrl.(string)
 		}
 	}
+	renderLoginTpl(data, w)
+}
 
-	// You can access the mgo session object from the request object.
-	// The session object is stored in key `mgoSession`.
-	// mgoSession := context.Get(r, "mgoSession").(*mgo.Session)
-	// count2, _ := mgoSession.DB("citation").C("users").Find(bson.M{ "Username": "Maik" }).Count()
-
+func renderLoginTpl(data models.PageLogin, w http.ResponseWriter) {
 	tpl, err := template.ParseFiles("html/frame_footer.html", "html/frame_header.html", "html/login.html")
 	if err != nil {
 		panic(err)

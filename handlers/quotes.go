@@ -330,6 +330,7 @@ func handleQuotesEditPOST(w http.ResponseWriter, r *http.Request) {
 func HandleQuotesRemove(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 		http.Error(w, "Bad Request", http.StatusBadRequest)
+		return
 	}
 	user := context.Get(r, "User").(*models.User)
 	pData := models.Page{}
