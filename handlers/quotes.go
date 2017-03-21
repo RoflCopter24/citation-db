@@ -16,6 +16,7 @@ import (
 func HandleQuotesIndex(w http.ResponseWriter, r *http.Request) {
 	u := context.Get(r, "User")
 	if u == nil {
+		log.Fatal("[HandleQuotesIndex] User is nil!")
 		http.Redirect(w, r, "/login", 302)
 		return
 	}
