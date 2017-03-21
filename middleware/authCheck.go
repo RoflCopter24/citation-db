@@ -37,6 +37,7 @@ func (ac *AuthChecker) Middleware() negroni.HandlerFunc {
 		u := session.Get("Username")
 
 		if u == nil {
+			log.Println("Username not set in session! Reditrecting to login.")
 			context.Set(request, "TargetUrl", request.RequestURI)
 			session.Set("TargetUrl", request.RequestURI)
 			http.Redirect(writer, request, "/login", 302)
@@ -57,7 +58,9 @@ func (ac *AuthChecker) Middleware() negroni.HandlerFunc {
 			err := db.C("users").Find(bson.M{"username": uName }).One(&user)
 
 			if err != nil {
-				log.Fatal(err, uName)
+				log.Fatalln(err)
+				http.Redirect(writer, request, "/login", 302)
+				return
 			}
 		}
 
