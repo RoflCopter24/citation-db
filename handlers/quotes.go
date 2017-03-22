@@ -62,7 +62,7 @@ func handleQuotesSearchPOST(w http.ResponseWriter, r *http.Request) {
 
 		if errBook != nil {
 			pData.Error = errBook.Error()
-			log.Fatal(errBook)
+			log.Println(errBook)
 			goto renderHTML
 		}
 

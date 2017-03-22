@@ -14,7 +14,8 @@ import (
 	"log"
 	"os"
 	"strconv"
-	"github.com/RoflCopter24/negroni-sessions/cookiestore"
+	"github.com/RoflCopter24/negroni-sessions/mongostore"
+	"github.com/gorilla/securecookie"
 )
 
 var (
@@ -47,15 +48,15 @@ func main() {
 	n := negroni.Classic()
 
 	// Setup MongoDb connection stuff
-	 _ = setupMgo(n, &appSettings)
+	 s := setupMgo(n, &appSettings)
 
 
 	n.Use(negroni.NewRecovery())
 
 	n.Use(negroni.NewLogger())
 
-	//store := mongostore.New(*s, appSettings.DbName, "sessions", 500000, true, securecookie.GenerateRandomKey(16))
-	store := cookiestore.New([]byte("citation-db.C_Store01"))
+	store := mongostore.New(*s, appSettings.DbName, "sessions", 200000, true, securecookie.GenerateRandomKey(16) , securecookie.GenerateRandomKey(16))
+	//store := cookiestore.New([]byte("citation-db.C_Store01"))
 	n.Use(sessions.Sessions("CitationSession", store))
 
 	whiteList := make([]string,5)
